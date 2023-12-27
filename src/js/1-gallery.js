@@ -89,8 +89,4 @@ const images = [
     captionPosition: "bottom",
   });
   
-  lightbox.on("show.simplelightbox", () => {
-  });
-  
-  lightbox.on("close.simplelightbox", () => {
-  });
+ 

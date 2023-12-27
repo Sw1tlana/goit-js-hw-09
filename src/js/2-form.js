@@ -5,8 +5,8 @@ const savedStates = localStorage.getItem(localStorageKey);
 
     if(savedStates) {
     const { email, message } = JSON.parse(savedStates);
-    form.elements.email.value = email !== undefined ? email : "";
-    form.elements.message.value = message !== undefined ? message : "";
+    form.elements.email.value = email || "";
+    form.elements.message.value = message || "";
 }
 
 form.addEventListener("input", (evt) => {
@@ -29,6 +29,15 @@ function changeLocaleStorage (evt) {
 
 function submitForm (evt) {
     evt.preventDefault();
+    const elements = form.elements;
+    const submitData = {
+        email: elements.email.value.trim(),
+        message: elements.message.value.trim()
+    }
+       if (submitData.email && submitData.message) {
+        console.log(submitData);
+    }
+
     localStorage.removeItem(localStorageKey);
     form.reset();
 }
