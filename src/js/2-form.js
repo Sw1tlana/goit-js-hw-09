@@ -3,42 +3,43 @@ const localStorageKey = "feedback-form-state";
 
 const savedStates = localStorage.getItem(localStorageKey);
 
-    if(savedStates) {
+if (savedStates) {
     const { email, message } = JSON.parse(savedStates);
     form.elements.email.value = email || "";
     form.elements.message.value = message || "";
 }
 
-form.addEventListener("input", (evt) => {
-    changeLocaleStorage(evt);
-});
+form.addEventListener("input", changeLocalStorage);
 
-form.addEventListener("submit", (evt) => {
-    submitForm(evt);
-});
+form.addEventListener("submit", submitForm);
 
-function changeLocaleStorage (evt) {
+
+function changeLocalStorage(evt) {
     const elements = form.elements;
     const submitData = {
         email: elements.email.value.trim(),
         message: elements.message.value.trim()
     }
-    
+
     localStorage.setItem(localStorageKey, JSON.stringify(submitData));
 }
 
-function submitForm (evt) {
+function submitForm(evt) {
     evt.preventDefault();
+
     const elements = form.elements;
     const submitData = {
         email: elements.email.value.trim(),
         message: elements.message.value.trim()
     }
-       if (submitData.email && submitData.message) {
+
+    if (submitData.email && submitData.message) {
         console.log(submitData);
-    }
 
     localStorage.removeItem(localStorageKey);
     form.reset();
+    } else {
+        alert("Будь ласка, заповніть обидва поля");
+    }
 }
 
